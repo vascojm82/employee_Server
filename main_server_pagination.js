@@ -34,12 +34,8 @@ app.get('/', function (req, res) {
 
 //Get all employees
 app.get('/employees', function (req, res) {
-
-    var pageNumber = req.param("currentPage");
-    var pageSize = req.param("pageSize");
-    
-    console.log(pageNumber);
-    console.log(pageSize);
+    var pageNumber = parseInt(req.param("currentPage"));
+    var pageSize = parseInt(req.param("pageSize"));
     
     employee.find({}).skip((pageNumber-1)*pageSize).limit(pageSize).exec(function(err,response){
         if(response)
@@ -49,15 +45,26 @@ app.get('/employees', function (req, res) {
         else if(err)
             res.send(err);                                                                    
     });
-    /*employee.find({},function(err,response){
+});
+
+//Get employee count
+app.get('/employees/recordCount', function (req, res) {
+    employee.count({}, function(err,response){
         if(response)
-        {
-            console.log(response);
-            res.send(response);
+       {    
+            var count = response;
+            var param ={
+                count : count,
+                status: 200
+            }
+            
+            res.send(param);
         }
         else if(err)
+        {
             res.send(err);
-    });*/
+        }
+    }); 
 });
 
 app.get('/employee', function (req, res) {
