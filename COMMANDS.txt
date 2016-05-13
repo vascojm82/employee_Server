@@ -1,0 +1,34 @@
+COMMANDS:
+
+**Install BOWER
+
+npm install -g bower
+
+
+**After downloading REPOS
+
+
+CLIENT_SIDE
+
+*From root folder of project (Where package.json lies)
+
+bower install
+
+
+SERVER-SIDE
+
+npm install
+
+npm install express
+
+npm install body-parser
+
+npm install mongoose
+
+
+MONGO DB
+
+**After creating database in Mongo server & placing JSON file with records in mongo dir
+
+mongoimport -d employeeDb -c Employees --jsonArray db_entries_2.json
+
